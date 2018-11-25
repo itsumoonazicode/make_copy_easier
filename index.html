@@ -9,29 +9,28 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
 
 </head>
 <body>
-    <header>
-        <h1>コピーペッター</h1>
-    </header>
-    <main>
-        <div>
-            <p>
-                <input type="text" name="" class="copyText">
-                <input type="text" name="" class="copyText">
-                <button id="copyBtn">コピー</button>
-            </p>
-            <p>
-                <input type="text" name="" class="copyText">
-                <input type="text" name="" class="copyText">
-            </p>
-        </div>
-    </main>
+    <div class="container">
+        <header>
+            <h1 class="display-4">コピーペッター</h1>
+        </header>
+        <main>
+            <div>
+                <p>
+                    <input type="text" name="" class="copyText form-control">
+                </p>
+                <p>
+                    <button id="copyBtn" type="button" class="btn btn-success">コピー</button>
+                </p>
+            </div>
+            <ul id="list-group"></ul>
+        </main>
+    </div>
     <script src="main.js"></script>
 
 </body>
