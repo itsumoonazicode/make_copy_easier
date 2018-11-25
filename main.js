@@ -43,11 +43,13 @@ const copy = function () {
         console.log('failed to copy');
     });
 };
-const copyButton = document.getElementById('copy');
-copyButton.addEventListener('click', function () {
-    copy();
+window.addEventListener("DOMContentLoaded", () => {
+    const copyButton = document.getElementById('copy');
+    copyButton.addEventListener('click', function () {
+        copy();
+    }, false);    
 }, false);
-  
+
 const paste = function () {
     navigator.clipboard.readText()
     .then(function (text) {
@@ -56,7 +58,9 @@ const paste = function () {
         console.log('failed to paste');
     });
 };
-const pasteButton = document.getElementById('paste');
-pasteButton.addEventListener('click', function () {
-    paste();
+window.addEventListener("DOMContentLoaded", () => {
+    const pasteButton = document.getElementById('paste');
+    pasteButton.addEventListener('click', function () {
+        paste();
+    }, false);
 }, false);
