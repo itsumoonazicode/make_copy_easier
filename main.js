@@ -30,3 +30,37 @@ if(parseCopyTxts instanceof Object) {
         console.log(mappingValue[j]);
     }
 }
+
+
+
+// Async Clipboard API を使用したクリップボード操作の実装（現状はテキストのみに対応）
+
+const copy = function () {
+    navigator.clipboard.writeText(document.getElementById('copyText').value)
+    .then(function () {
+        console.log('copied to clipboard');
+    }, function () {
+        console.log('failed to copy');
+    });
+};
+window.addEventListener("DOMContentLoaded", () => {
+    const copyButton = document.getElementById('copy');
+    copyButton.addEventListener('click', function () {
+        copy();
+    }, false);    
+}, false);
+
+const paste = function () {
+    navigator.clipboard.readText()
+    .then(function (text) {
+        document.getElementById('pasteArea').textContent = text;
+    }, function () {
+        console.log('failed to paste');
+    });
+};
+window.addEventListener("DOMContentLoaded", () => {
+    const pasteButton = document.getElementById('paste');
+    pasteButton.addEventListener('click', function () {
+        paste();
+    }, false);
+}, false);
