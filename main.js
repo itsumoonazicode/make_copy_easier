@@ -4,12 +4,29 @@ const copyTexts = document.querySelectorAll(".copyText");
 const lists = document.getElementById("list-group");
 const copyBtn = document.getElementById("copyBtn");
 
+// copyBtn.addEventListener("click", () => {
+//     let data = {};
+//     let i = 0;
+//     copyTexts.forEach((e) => {
+//         data[i] = e.value;
+//         i++;
+//     });
+//     myStorage.setItem("copytxt", JSON.stringify(data));
+//     copyBtn.insertAdjacentHTML("beforebegin", "<p><input type='text' class='copyText form-control'></p>");
+// });
+
 copyBtn.addEventListener("click", () => {
-    const copyTexts = document.querySelectorAll(".copyText");
     let data = {};
     let i = 0;
     copyTexts.forEach((e) => {
         data[i] = e.value;
+        navigator.clipboard.writeText(data[i])
+        .then(() => {
+            console.log("copied to clipboard");
+        })
+        .catch((err) => {
+            console.error(err);
+        });
         i++;
     });
     myStorage.setItem("copytxt", JSON.stringify(data));
@@ -43,24 +60,70 @@ const copy = function () {
         console.log('failed to copy');
     });
 };
-window.addEventListener("DOMContentLoaded", () => {
-    const copyButton = document.getElementById('copy');
-    copyButton.addEventListener('click', function () {
-        copy();
-    }, false);    
-}, false);
+// window.addEventListener("DOMContentLoaded", () => {
+//     const copyButton = document.getElementById('copy');
+//     copyButton.addEventListener('click', function () {
+//         copy();
+//     }, false);    
+// }, false);
 
 const paste = function () {
-    navigator.clipboard.readText()
-    .then(function (text) {
-        document.getElementById('pasteArea').textContent = text;
-    }, function () {
-        console.log('failed to paste');
-    });
+    navigator.permissions.query({name: "clipboard-read"})
+        navigator.clipboard.readText()
+            .then((txt) => {
+                console.log(txt);
+                document.getElementById('pasteArea').textContent = txt;
+            })
+            .catch((err) => {
+                console.error(err);
+            });
+    // navigator.clipboard.readText()
+    // .then((text) => {
+    //     console.log(text);
+    //     document.getElementById('pasteArea').textContent = text;
+    // })
+    // .catch((e) => {
+    //     console.error(e);
+    // });
 };
+// window.addEventListener("DOMContentLoaded", () => {
+//     const pasteButton = document.getElementById('paste');
+//     pasteButton.addEventListener('click', function () {
+//         paste();
+//     }, false);
+// }, false);
+
+
+navigator.permissions.query({name: "clipboard-read"})
+    .then((result) => {
+        console.log(result);
+        if(result.state === "granted") {
+            console.info("クリップボードの変更を検知可能");
+        } else if(result.state === "prompt") {
+            console.info("クリップボードのreadパーミッションの許可が必要");
+        } else if(result.state === "denied") {
+            console.error("クリップボードのreadパーミッションが付与されていません。");
+        }
+
+        result.onchange = () => {
+            console.info("パーミッションが変更されました。");
+        }
+    });
+
+
 window.addEventListener("DOMContentLoaded", () => {
-    const pasteButton = document.getElementById('paste');
-    pasteButton.addEventListener('click', function () {
-        paste();
-    }, false);
-}, false);
+    document.body.addEventListener("keydown",function(e){
+        e = e || window.event;
+        var key = e.which || e.keyCode; // keyCode detection
+        var ctrl = e.ctrlKey ? e.ctrlKey : ((key === 17) ? true : false); // ctrl detection
+    
+        if ( key == 86 && ctrl )
+        {
+            paste();
+        }
+        // else if ( key == 67 && ctrl )
+        // {
+        //     copy();
+        // } 
+    },false);
+});
