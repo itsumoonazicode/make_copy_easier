@@ -68,23 +68,13 @@ const copy = function () {
 // }, false);
 
 const paste = function () {
-    navigator.permissions.query({name: "clipboard-read"})
-        navigator.clipboard.readText()
-            .then((txt) => {
-                console.log(txt);
-                document.getElementById('pasteArea').textContent = txt;
-            })
-            .catch((err) => {
-                console.error(err);
-            });
-    // navigator.clipboard.readText()
-    // .then((text) => {
-    //     console.log(text);
-    //     document.getElementById('pasteArea').textContent = text;
-    // })
-    // .catch((e) => {
-    //     console.error(e);
-    // });
+    navigator.clipboard.readText()
+        .then((txt) => {
+            document.getElementById('pasteArea').textContent = txt;
+        })
+        .catch((err) => {
+            console.error(err);
+        });
 };
 // window.addEventListener("DOMContentLoaded", () => {
 //     const pasteButton = document.getElementById('paste');
