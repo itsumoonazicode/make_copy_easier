@@ -70,7 +70,8 @@ const copy = function () {
 const paste = function () {
     navigator.clipboard.readText()
         .then((txt) => {
-            document.getElementById('pasteArea').textContent = txt;
+            document.getElementById('pasteArea').insertAdjacentHTML("afterend", "<p><input type='text' class='copyText form-control' value='"+ txt +"'></p>");
+            // document.getElementById('pasteArea').textContent = txt;
         })
         .catch((err) => {
             console.error(err);
