@@ -35,11 +35,11 @@ if(parseCopyTxts instanceof Object) {
     console.log(mappingValue);
 
     for(let j = 0; j < mappingValue.length; j++) {
+        document.getElementById('pasteArea').insertAdjacentHTML("afterbegin", "<p><input type='text' class='copyText form-control' value='"+ mappingValue[j] +"'></p>");
         lists.insertAdjacentHTML("beforeend", "<li class='list-group-item'>" + mappingValue[j] + "</li>");
         console.log(mappingValue[j]);
     }
 }
-
 
 // Async Clipboard API を使用したクリップボード操作の実装（現状はテキストのみに対応）
 
@@ -60,13 +60,13 @@ const copy = function () {
 
 const paste = function () {
     navigator.clipboard.readText()
-        .then((txt) => {
-            document.getElementById('pasteArea').insertAdjacentHTML("afterend", "<p><input type='text' class='copyText form-control' value='"+ txt +"'></p>");
-            // document.getElementById('pasteArea').textContent = txt;
-        })
-        .catch((err) => {
-            console.error(err);
-        });
+    .then((txt) => {
+        document.getElementById('pasteArea').insertAdjacentHTML("afterend", "<p><input type='text' class='copyText form-control' value='"+ txt +"'></p>");
+        // document.getElementById('pasteArea').textContent = txt;
+    })
+    .catch((err) => {
+        console.error(err);
+    });
 };
 // window.addEventListener("DOMContentLoaded", () => {
 //     const pasteButton = document.getElementById('paste');
@@ -77,20 +77,23 @@ const paste = function () {
 
 
 navigator.permissions.query({name: "clipboard-read"})
-    .then((result) => {
-        console.log(result);
-        if(result.state === "granted") {
-            console.info("クリップボードの変更を検知可能");
-        } else if(result.state === "prompt") {
-            console.info("クリップボードのreadパーミッションの許可が必要");
-        } else if(result.state === "denied") {
-            console.error("クリップボードのreadパーミッションが付与されていません。");
-        }
+.then((result) => {
+    console.log(result);
+    if(result.state === "granted") {
+        console.info("クリップボードの変更を検知可能");
+    } else if(result.state === "prompt") {
+        console.info("クリップボードのreadパーミッションの許可が必要");
+    } else if(result.state === "denied") {
+        console.error("クリップボードのreadパーミッションが付与されていません。");
+    }
 
-        result.onchange = () => {
-            console.info("パーミッションが変更されました。");
-        }
-    });
+    result.onchange = () => {
+        console.info("パーミッションが変更されました。");
+    }
+})
+.catch((e) => {
+    console.error(e);
+});
 
 
 window.addEventListener("DOMContentLoaded", () => {
