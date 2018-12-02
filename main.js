@@ -1,8 +1,7 @@
 const myStorage = localStorage;
-
-const copyTexts = document.querySelectorAll(".copyText");
 const lists = document.getElementById("list-group");
 const copyBtn = document.getElementById("copyBtn");
+const setLocalStorageBtn = document.getElementById("setLocalStorageBtn");
 
 // copyBtn.addEventListener("click", () => {
 //     let data = {};
@@ -15,23 +14,16 @@ const copyBtn = document.getElementById("copyBtn");
 //     copyBtn.insertAdjacentHTML("beforebegin", "<p><input type='text' class='copyText form-control'></p>");
 // });
 
-copyBtn.addEventListener("click", () => {
+setLocalStorageBtn.addEventListener("click", () => {
+    const copyTexts = document.querySelectorAll(".copyText");
     let data = {};
     let i = 0;
     copyTexts.forEach((e) => {
         data[i] = e.value;
-        navigator.clipboard.writeText(data[i])
-        .then(() => {
-            console.log("copied to clipboard");
-        })
-        .catch((err) => {
-            console.error(err);
-        });
         i++;
     });
     myStorage.setItem("copytxt", JSON.stringify(data));
-    copyBtn.insertAdjacentHTML("beforebegin", "<p><input type='text' class='copyText form-control'></p>");
-});
+}, false);
 
 const parseCopyTxts = JSON.parse(myStorage.getItem("copytxt"));
 if(parseCopyTxts instanceof Object) {
@@ -47,7 +39,6 @@ if(parseCopyTxts instanceof Object) {
         console.log(mappingValue[j]);
     }
 }
-
 
 
 // Async Clipboard API を使用したクリップボード操作の実装（現状はテキストのみに対応）
@@ -116,5 +107,5 @@ window.addEventListener("DOMContentLoaded", () => {
         // {
         //     copy();
         // } 
-    },false);
-});
+    }, false);
+}, false);

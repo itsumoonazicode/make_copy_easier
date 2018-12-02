@@ -20,29 +20,32 @@
             <h1 class="display-4">コピーペッター</h1>
         </header>
         <main>
+            <h1>asynchronous Clipboard API</h1>
+
+            <p>Run on Chrome M66 or higher. <a href="https://www.chromestatus.com/feature/5861289330999296">link</a></p>
+    
+            <p>
+            <!-- <input type="text" id="copyText" value="THIS CLIPBOARD WAS OCCUPIED"><button id="copy">Copy to Clipboard</button> -->
+            <!-- <button id="paste">Paste from Clipboard</button> -->
+            </p>
+    
+            <div id="pasteArea"></div>
+            <p><button id="setLocalStorageBtn" class="btn btn-success">save localstorage</button></p>
+        
             <div>
                 <p>
-                    <input type="text" name="" class="copyText form-control">
+                    <!-- <input type="text" name="" class="copyText form-control"> -->
                 </p>
                 <p>
-                    <button id="copyBtn" type="button" class="btn btn-success">コピー</button>
+                    <!-- <button id="copyBtn" type="button" class="btn btn-success">コピー</button> -->
                 </p>
             </div>
             <ul id="list-group"></ul>
         </main>
+
+
     </div>
-    <script src="main.js"></script>
 
-
-    <h1>asynchronous Clipboard API</h1>
-
-    <p>Run on Chrome M66 or higher. <a href="https://www.chromestatus.com/feature/5861289330999296">link</a></p>
-
-    <p>
-    <!-- <input type="text" id="copyText" value="THIS CLIPBOARD WAS OCCUPIED"><button id="copy">Copy to Clipboard</button> -->
-    <!-- <button id="paste">Paste from Clipboard</button> -->
-    </p>
-
-    <div id="pasteArea"></div>
+<script src="main.js"></script>
 </body>
 </html>
